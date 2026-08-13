@@ -1,159 +1,160 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0f">
-  <title>Frontend Journey · noters.cn</title>
-  <style>
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Frontend Journey</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-:root {
-	--bg: #0a0a0f;
-	--scrim: 0.18;
-}
+      :root {
+        --bg: #0a0a0f;
+        --scrim: 0.18;
+      }
 
-html {
-	scroll-behavior: auto;
-}
+      html {
+        scroll-behavior: auto;
+      }
 
-body {
-	background: var(--bg);
-	overflow-x: hidden;
-	cursor: crosshair;
-}
+      body {
+        background: var(--bg);
+        overflow-x: hidden;
+        cursor: crosshair;
+      }
 
-/* ── Fixed canvas ─────────────────────────────────────── */
-#webgl_canvas {
-	position: fixed;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 0;
-	display: block;
-}
+      /* ── Fixed canvas ─────────────────────────────────────── */
+      #webgl_canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        display: block;
+      }
 
-/* ── Scrollable content ───────────────────────────────── */
-#scroll_track {
-	position: relative;
-	z-index: 5;
-	pointer-events: none;
-}
+      /* ── Scrollable content ───────────────────────────────── */
+      #scroll_track {
+        position: relative;
+        z-index: 5;
+        pointer-events: none;
+      }
 
-.scene-section {
-	height: 100vh;
-	position: relative;
-}
+      .scene-section {
+        height: 100vh;
+        position: relative;
+      }
 
-/* Bottom scrim — gets more opaque as night approaches */
-.scene-section::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(
-		to top,
-		rgba(0, 0, 8, var(--scrim, 0.18)) 0%,
-		rgba(0, 0, 8, calc(var(--scrim, 0.18) * 0.4)) 40%,
-		transparent 70%
-	);
-	pointer-events: none;
-	z-index: 0;
-	transition: --scrim 0.5s;
-}
+      /* Bottom scrim — gets more opaque as night approaches */
+      .scene-section::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 8, var(--scrim, 0.18)) 0%, rgba(0, 0, 8, calc(var(--scrim, 0.18) * 0.4)) 40%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+        transition: --scrim 0.5s;
+      }
 
-#site-footer {
-	position: fixed;
-	left: 50%;
-	bottom: max(0.75rem, env(safe-area-inset-bottom));
-	transform: translateX(-50%);
-	z-index: 10;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 0.75rem;
-	white-space: nowrap;
-	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-}
+      #site-footer {
+        position: fixed;
+        left: 50%;
+        bottom: max(0.75rem, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        z-index: 10;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+        white-space: nowrap;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+      }
 
-#footer-title {
-	color: rgba(255, 255, 255, 0.32);
-	font: 600 11px/1.5 system-ui, sans-serif;
-	letter-spacing: 0.15em;
-}
+      #footer-title {
+        color: rgba(255, 255, 255, 0.32);
+        font:
+          600 11px/1.5 system-ui,
+          sans-serif;
+        letter-spacing: 0.15em;
+      }
 
-#footer-separator {
-	color: rgba(255, 255, 255, 0.2);
-}
+      #footer-separator {
+        color: rgba(255, 255, 255, 0.2);
+      }
 
-#icp {
-	color: rgba(255, 255, 255, 0.28);
-	font: 12px/1.5 system-ui, sans-serif;
-	text-decoration: none;
-}
+      #icp {
+        color: rgba(255, 255, 255, 0.28);
+        font:
+          12px/1.5 system-ui,
+          sans-serif;
+        text-decoration: none;
+      }
 
-#icp:hover {
-	color: rgba(255, 255, 255, 0.55);
-}
+      #icp:hover {
+        color: rgba(255, 255, 255, 0.55);
+      }
 
-#site-title {
-	position: fixed;
-	top: max(1rem, env(safe-area-inset-top));
-	left: max(1rem, env(safe-area-inset-left));
-	z-index: 10;
-	color: rgba(255, 255, 255, 0.65);
-	font: 600 12px/1.5 system-ui, sans-serif;
-	letter-spacing: 0.2em;
-	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-}
+      #site-title {
+        position: fixed;
+        top: max(1rem, env(safe-area-inset-top));
+        left: max(1rem, env(safe-area-inset-left));
+        z-index: 10;
+        color: rgba(255, 255, 255, 0.65);
+        font:
+          600 12px/1.5 system-ui,
+          sans-serif;
+        letter-spacing: 0.2em;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="webgl_canvas" aria-hidden="true"></canvas>
+    <h1 id="site-title">FRONTEND JOURNEY</h1>
+    <div id="scroll_track" aria-hidden="true">
+      <div class="scene-section"></div>
+      <div class="scene-section"></div>
+      <div class="scene-section"></div>
+      <div class="scene-section"></div>
+      <div class="scene-section"></div>
+      <div class="scene-section"></div>
+    </div>
+    <footer id="site-footer">
+      <div id="footer-title">FRONTEND JOURNEY</div>
+      <span id="footer-separator" aria-hidden="true">·</span>
+      <a id="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备20003341号-1</a>
+    </footer>
+    <script>
+      // ── WebGL setup ──────────────────────────────────────────────────────────────
+      const canvas = document.getElementById('webgl_canvas')
+      const gl = canvas.getContext('webgl', {
+        alpha: false,
+        antialias: false,
+        depth: false,
+        stencil: false,
+        preserveDrawingBuffer: false,
+        powerPreference: 'high-performance',
+      })
 
-  </style>
-</head>
-<body>
-<canvas id="webgl_canvas" aria-hidden="true"></canvas>
-<h1 id="site-title">FRONTEND JOURNEY</h1>
-<div id="scroll_track" aria-hidden="true">
-	<div class="scene-section"></div>
-	<div class="scene-section"></div>
-	<div class="scene-section"></div>
-	<div class="scene-section"></div>
-	<div class="scene-section"></div>
-	<div class="scene-section"></div>
-</div>
-<footer id="site-footer">
-	<div id="footer-title">FRONTEND JOURNEY</div>
-	<span id="footer-separator" aria-hidden="true">·</span>
-	<a id="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备20003341号-1</a>
-</footer>
-  <script>
-// ── WebGL setup ──────────────────────────────────────────────────────────────
-const canvas = document.getElementById("webgl_canvas");
-const gl = canvas.getContext("webgl", {
-	alpha: false,
-	antialias: false,
-	depth: false,
-	stencil: false,
-	preserveDrawingBuffer: false,
-	powerPreference: "high-performance"
-});
+      if (!gl) {
+        canvas.style.background = '#0a0a0f'
+        throw new Error('WebGL not supported')
+      }
 
-if (!gl) {
-	canvas.style.background = "#0a0a0f";
-	throw new Error("WebGL not supported");
-}
-
-// ── Shaders ──────────────────────────────────────────────────────────────────
-const VS = `
+      // ── Shaders ──────────────────────────────────────────────────────────────────
+      const VS = `
 attribute vec2 a;
 void main() { gl_Position = vec4(a, 0.0, 1.0); }
-`;
+`
 
-const FS = `
+      const FS = `
 precision highp float;
 
 uniform vec2  uR;
@@ -868,242 +869,222 @@ void main() {
        * GRAIN_STR;
   gl_FragColor = vec4(clamp(pow(col, vec3(GAMMA)), 0.0, 1.0), 1.0);
 }
-`;
+`
 
-// ── Compile & link ───────────────────────────────────────────────────────────
-const mkShader = (type, src) => {
-	const s = gl.createShader(type);
-	gl.shaderSource(s, src);
-	gl.compileShader(s);
-	if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
-		console.error(gl.getShaderInfoLog(s));
-		gl.deleteShader(s);
-		return null;
-	}
-	return s;
-};
+      // ── Compile & link ───────────────────────────────────────────────────────────
+      const mkShader = (type, src) => {
+        const s = gl.createShader(type)
+        gl.shaderSource(s, src)
+        gl.compileShader(s)
+        if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+          console.error(gl.getShaderInfoLog(s))
+          gl.deleteShader(s)
+          return null
+        }
+        return s
+      }
 
-const vert = mkShader(gl.VERTEX_SHADER, VS);
-const frag = mkShader(gl.FRAGMENT_SHADER, FS);
-const prog = gl.createProgram();
-gl.attachShader(prog, vert);
-gl.attachShader(prog, frag);
-gl.linkProgram(prog);
+      const vert = mkShader(gl.VERTEX_SHADER, VS)
+      const frag = mkShader(gl.FRAGMENT_SHADER, FS)
+      const prog = gl.createProgram()
+      gl.attachShader(prog, vert)
+      gl.attachShader(prog, frag)
+      gl.linkProgram(prog)
 
-if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
-	console.error(gl.getProgramInfoLog(prog));
-	throw new Error("Program linking failed");
-}
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+        console.error(gl.getProgramInfoLog(prog))
+        throw new Error('Program linking failed')
+      }
 
-gl.useProgram(prog);
-gl.disable(gl.DEPTH_TEST);
-gl.disable(gl.CULL_FACE);
-gl.disable(gl.BLEND);
-gl.disable(gl.DITHER);
+      gl.useProgram(prog)
+      gl.disable(gl.DEPTH_TEST)
+      gl.disable(gl.CULL_FACE)
+      gl.disable(gl.BLEND)
+      gl.disable(gl.DITHER)
 
-const buf = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-gl.bufferData(
-	gl.ARRAY_BUFFER,
-	new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
-	gl.STATIC_DRAW
-);
+      const buf = gl.createBuffer()
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW)
 
-const ap = gl.getAttribLocation(prog, "a");
-gl.enableVertexAttribArray(ap);
-gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0);
+      const ap = gl.getAttribLocation(prog, 'a')
+      gl.enableVertexAttribArray(ap)
+      gl.vertexAttribPointer(ap, 2, gl.FLOAT, false, 0, 0)
 
-const uR = gl.getUniformLocation(prog, "uR");
-const uTi = gl.getUniformLocation(prog, "uT");
-const uScroll = gl.getUniformLocation(prog, "uS");
-const uScene = gl.getUniformLocation(prog, "uSc");
-const uBlend = gl.getUniformLocation(prog, "uBl");
+      const uR = gl.getUniformLocation(prog, 'uR')
+      const uTi = gl.getUniformLocation(prog, 'uT')
+      const uScroll = gl.getUniformLocation(prog, 'uS')
+      const uScene = gl.getUniformLocation(prog, 'uSc')
+      const uBlend = gl.getUniformLocation(prog, 'uBl')
 
-// ── Renderer config ──────────────────────────────────────────────────────────
-const SCENE_COUNT = 6;
-const MAX_DPR = 1.5; // cap device pixel ratio to limit fill rate
-const QUALITY_MIN = 0.82; // lowest render scale before we give up
-const QUALITY_MAX = 1.0; // highest render scale (native)
-const QUALITY_STEP_DN = 0.06; // step down when FPS is low
-const QUALITY_STEP_UP = 0.04; // step up when FPS recovers
-const FPS_LOW = 50; // fps below which we reduce quality
-const FPS_HIGH = 57; // fps above which we restore quality
-const FPS_EVAL_WINDOW = 0.75; // seconds between quality evaluations
-const FPS_LOW_GRACE = 1.5; // seconds of low fps before acting
-const FPS_HIGH_GRACE = 3.0; // seconds of high fps before restoring
-const SCROLL_EASE = 0.1; // wheel → scrollY multiplier
-const VELOCITY_MAX = 520; // max wheel velocity (px/tick)
-const VELOCITY_DAMPING = 0.86; // exponential velocity decay base (per 60fps frame)
-const VELOCITY_CUTOFF = 0.02; // velocity below this is clamped to zero
-const SMOOTH_SPEED = 8; // scroll smoothing spring constant (higher = snappier)
-const DT_MAX = 0.05; // max delta-time clamped to avoid spiral of death
-const NIGHT_SCRIM_LO = 0.583; // scroll progress where scrim starts deepening
-const NIGHT_SCRIM_SPAN = 0.25; // scroll range over which scrim reaches max
-const SCRIM_BASE = 0.18; // scrim opacity at dawn
-const SCRIM_PEAK = 0.56; // additional scrim opacity added by full night
+      // ── Renderer config ──────────────────────────────────────────────────────────
+      const SCENE_COUNT = 6
+      const MAX_DPR = 1.5 // cap device pixel ratio to limit fill rate
+      const QUALITY_MIN = 0.82 // lowest render scale before we give up
+      const QUALITY_MAX = 1.0 // highest render scale (native)
+      const QUALITY_STEP_DN = 0.06 // step down when FPS is low
+      const QUALITY_STEP_UP = 0.04 // step up when FPS recovers
+      const FPS_LOW = 50 // fps below which we reduce quality
+      const FPS_HIGH = 57 // fps above which we restore quality
+      const FPS_EVAL_WINDOW = 0.75 // seconds between quality evaluations
+      const FPS_LOW_GRACE = 1.5 // seconds of low fps before acting
+      const FPS_HIGH_GRACE = 3.0 // seconds of high fps before restoring
+      const SCROLL_EASE = 0.1 // wheel → scrollY multiplier
+      const VELOCITY_MAX = 520 // max wheel velocity (px/tick)
+      const VELOCITY_DAMPING = 0.86 // exponential velocity decay base (per 60fps frame)
+      const VELOCITY_CUTOFF = 0.02 // velocity below this is clamped to zero
+      const SMOOTH_SPEED = 8 // scroll smoothing spring constant (higher = snappier)
+      const DT_MAX = 0.05 // max delta-time clamped to avoid spiral of death
+      const NIGHT_SCRIM_LO = 0.583 // scroll progress where scrim starts deepening
+      const NIGHT_SCRIM_SPAN = 0.25 // scroll range over which scrim reaches max
+      const SCRIM_BASE = 0.18 // scrim opacity at dawn
+      const SCRIM_PEAK = 0.56 // additional scrim opacity added by full night
 
-let maxScroll = 1,
-	tgt = 0,
-	smooth = 0,
-	velocity = 0;
-let qualityScale = QUALITY_MAX;
-let resizeRAF = 0,
-	lastVH = 0;
+      let maxScroll = 1,
+        tgt = 0,
+        smooth = 0,
+        velocity = 0
+      let qualityScale = QUALITY_MAX
+      let resizeRAF = 0,
+        lastVH = 0
 
-const updateScrollMetrics = () => {
-	const vh = lastVH || window.innerHeight;
-	maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
-	tgt = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0;
-};
+      const updateScrollMetrics = () => {
+        const vh = lastVH || window.innerHeight
+        maxScroll = Math.max(0, document.documentElement.scrollHeight - vh)
+        tgt = maxScroll > 0 ? Math.min(1, Math.max(0, window.scrollY / maxScroll)) : 0
+      }
 
-const resize = () => {
-	resizeRAF = 0;
-	const vp = window.visualViewport ?? {
-		width: window.innerWidth,
-		height: window.innerHeight
-	};
-	const cssW = Math.round(vp.width);
-	const cssH = Math.round(vp.height);
-	if (!cssW || !cssH) return;
-	lastVH = cssH;
-	const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-	const scale = dpr * qualityScale;
-	const pixelW = Math.max(1, Math.round(cssW * scale));
-	const pixelH = Math.max(1, Math.round(cssH * scale));
-	canvas.style.width = `${cssW}px`;
-	canvas.style.height = `${cssH}px`;
-	if (canvas.width !== pixelW || canvas.height !== pixelH) {
-		canvas.width = pixelW;
-		canvas.height = pixelH;
-		gl.viewport(0, 0, pixelW, pixelH);
-		gl.uniform2f(uR, pixelW, pixelH);
-		gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-	}
-	updateScrollMetrics();
-};
+      const resize = () => {
+        resizeRAF = 0
+        const vp = window.visualViewport ?? {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        }
+        const cssW = Math.round(vp.width)
+        const cssH = Math.round(vp.height)
+        if (!cssW || !cssH) return
+        lastVH = cssH
+        const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
+        const scale = dpr * qualityScale
+        const pixelW = Math.max(1, Math.round(cssW * scale))
+        const pixelH = Math.max(1, Math.round(cssH * scale))
+        canvas.style.width = `${cssW}px`
+        canvas.style.height = `${cssH}px`
+        if (canvas.width !== pixelW || canvas.height !== pixelH) {
+          canvas.width = pixelW
+          canvas.height = pixelH
+          gl.viewport(0, 0, pixelW, pixelH)
+          gl.uniform2f(uR, pixelW, pixelH)
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+        }
+        updateScrollMetrics()
+      }
 
-const requestResize = () => {
-	if (!resizeRAF) resizeRAF = requestAnimationFrame(resize);
-};
-resize();
-window.addEventListener("resize", requestResize, { passive: true });
-window.visualViewport?.addEventListener("resize", requestResize, {
-	passive: true
-});
-window.addEventListener("scroll", updateScrollMetrics, { passive: true });
-window.addEventListener("load", updateScrollMetrics, { passive: true });
+      const requestResize = () => {
+        if (!resizeRAF) resizeRAF = requestAnimationFrame(resize)
+      }
+      resize()
+      window.addEventListener('resize', requestResize, { passive: true })
+      window.visualViewport?.addEventListener('resize', requestResize, {
+        passive: true,
+      })
+      window.addEventListener('scroll', updateScrollMetrics, { passive: true })
+      window.addEventListener('load', updateScrollMetrics, { passive: true })
 
-// ── Wheel ────────────────────────────────────────────────────────────────────
-const WHEEL_LINE_PX = 16; // pixels per line in deltaMode=1
-const WHEEL_PAGE_FRAC = 0.9; // fraction of viewport height per page in deltaMode=2
+      // ── Wheel ────────────────────────────────────────────────────────────────────
+      const WHEEL_LINE_PX = 16 // pixels per line in deltaMode=1
+      const WHEEL_PAGE_FRAC = 0.9 // fraction of viewport height per page in deltaMode=2
 
-window.addEventListener(
-	"wheel",
-	(e) => {
-		if (e.ctrlKey || e.metaKey) return;
-		e.preventDefault();
-		const pagePx = window.innerHeight * WHEEL_PAGE_FRAC;
-		const delta =
-			e.deltaMode === 1
-				? e.deltaY * WHEEL_LINE_PX
-				: e.deltaMode === 2
-				? e.deltaY * pagePx
-				: e.deltaY;
+      window.addEventListener(
+        'wheel',
+        (e) => {
+          if (e.ctrlKey || e.metaKey) return
+          e.preventDefault()
+          const pagePx = window.innerHeight * WHEEL_PAGE_FRAC
+          const delta = e.deltaMode === 1 ? e.deltaY * WHEEL_LINE_PX : e.deltaMode === 2 ? e.deltaY * pagePx : e.deltaY
 
-		// Loop: at the very end, scrolling further wraps back to dawn
-		if (delta > 0 && window.scrollY >= maxScroll - 2) {
-			velocity = 0;
-			smooth = 0;
-			tgt = 0;
-			window.scrollTo({ top: 0, behavior: "auto" });
-			return;
-		}
+          // Loop: at the very end, scrolling further wraps back to dawn
+          if (delta > 0 && window.scrollY >= maxScroll - 2) {
+            velocity = 0
+            smooth = 0
+            tgt = 0
+            window.scrollTo({ top: 0, behavior: 'auto' })
+            return
+          }
 
-		velocity += delta;
-		velocity = Math.max(-VELOCITY_MAX, Math.min(VELOCITY_MAX, velocity));
-	},
-	{ passive: false }
-);
+          velocity += delta
+          velocity = Math.max(-VELOCITY_MAX, Math.min(VELOCITY_MAX, velocity))
+        },
+        { passive: false }
+      )
 
-// ── Performance adaptation ───────────────────────────────────────────────────
-let fpsAccum = 0,
-	fpsFrames = 0,
-	lowFpsTime = 0,
-	highFpsTime = 0;
-const maybeAdjustQuality = (dt) => {
-	fpsAccum += dt;
-	fpsFrames++;
-	if (fpsAccum < FPS_EVAL_WINDOW) return;
-	const fps = fpsFrames / fpsAccum;
-	fpsAccum = fpsFrames = 0;
-	if (fps < FPS_LOW) {
-		lowFpsTime += FPS_EVAL_WINDOW;
-		highFpsTime = 0;
-	} else if (fps > FPS_HIGH) {
-		highFpsTime += FPS_EVAL_WINDOW;
-		lowFpsTime = 0;
-	} else {
-		lowFpsTime = 0;
-		highFpsTime = 0;
-	}
-	if (lowFpsTime >= FPS_LOW_GRACE && qualityScale > QUALITY_MIN) {
-		qualityScale = Math.max(
-			QUALITY_MIN,
-			+(qualityScale - QUALITY_STEP_DN).toFixed(2)
-		);
-		lowFpsTime = 0;
-		requestResize();
-	}
-	if (highFpsTime >= FPS_HIGH_GRACE && qualityScale < QUALITY_MAX) {
-		qualityScale = Math.min(
-			QUALITY_MAX,
-			+(qualityScale + QUALITY_STEP_UP).toFixed(2)
-		);
-		highFpsTime = 0;
-		requestResize();
-	}
-};
+      // ── Performance adaptation ───────────────────────────────────────────────────
+      let fpsAccum = 0,
+        fpsFrames = 0,
+        lowFpsTime = 0,
+        highFpsTime = 0
+      const maybeAdjustQuality = (dt) => {
+        fpsAccum += dt
+        fpsFrames++
+        if (fpsAccum < FPS_EVAL_WINDOW) return
+        const fps = fpsFrames / fpsAccum
+        fpsAccum = fpsFrames = 0
+        if (fps < FPS_LOW) {
+          lowFpsTime += FPS_EVAL_WINDOW
+          highFpsTime = 0
+        } else if (fps > FPS_HIGH) {
+          highFpsTime += FPS_EVAL_WINDOW
+          lowFpsTime = 0
+        } else {
+          lowFpsTime = 0
+          highFpsTime = 0
+        }
+        if (lowFpsTime >= FPS_LOW_GRACE && qualityScale > QUALITY_MIN) {
+          qualityScale = Math.max(QUALITY_MIN, +(qualityScale - QUALITY_STEP_DN).toFixed(2))
+          lowFpsTime = 0
+          requestResize()
+        }
+        if (highFpsTime >= FPS_HIGH_GRACE && qualityScale < QUALITY_MAX) {
+          qualityScale = Math.min(QUALITY_MAX, +(qualityScale + QUALITY_STEP_UP).toFixed(2))
+          highFpsTime = 0
+          requestResize()
+        }
+      }
 
-// ── Render loop ──────────────────────────────────────────────────────────────
-const t0 = performance.now();
-let lastNow = t0;
+      // ── Render loop ──────────────────────────────────────────────────────────────
+      const t0 = performance.now()
+      let lastNow = t0
 
-const frame = (now) => {
-	requestAnimationFrame(frame);
-	const dt = Math.min((now - lastNow) / 1000, DT_MAX);
-	lastNow = now;
+      const frame = (now) => {
+        requestAnimationFrame(frame)
+        const dt = Math.min((now - lastNow) / 1000, DT_MAX)
+        lastNow = now
 
-	maybeAdjustQuality(dt);
+        maybeAdjustQuality(dt)
 
-	velocity *= Math.pow(VELOCITY_DAMPING, dt * 60);
-	if (Math.abs(velocity) < VELOCITY_CUTOFF) velocity = 0;
-	if (velocity !== 0)
-		window.scrollBy({ top: velocity * SCROLL_EASE, behavior: "auto" });
+        velocity *= Math.pow(VELOCITY_DAMPING, dt * 60)
+        if (Math.abs(velocity) < VELOCITY_CUTOFF) velocity = 0
+        if (velocity !== 0) window.scrollBy({ top: velocity * SCROLL_EASE, behavior: 'auto' })
 
-	smooth += (tgt - smooth) * (1 - Math.exp(-dt * SMOOTH_SPEED));
+        smooth += (tgt - smooth) * (1 - Math.exp(-dt * SMOOTH_SPEED))
 
-	const raw = smooth * (SCENE_COUNT - 1);
-	const si = Math.min(Math.floor(raw), SCENE_COUNT - 2);
-	const bl = raw - si;
+        const raw = smooth * (SCENE_COUNT - 1)
+        const si = Math.min(Math.floor(raw), SCENE_COUNT - 2)
+        const bl = raw - si
 
-	// Night scrim deepens from SCRIM_BASE → SCRIM_BASE+SCRIM_PEAK over night transition
-	const nightT = Math.max(
-		0,
-		Math.min(1, (smooth - NIGHT_SCRIM_LO) / NIGHT_SCRIM_SPAN)
-	);
-	const scrimVal = (SCRIM_BASE + nightT * SCRIM_PEAK).toFixed(3);
-	document.documentElement.style.setProperty("--scrim", scrimVal);
+        // Night scrim deepens from SCRIM_BASE → SCRIM_BASE+SCRIM_PEAK over night transition
+        const nightT = Math.max(0, Math.min(1, (smooth - NIGHT_SCRIM_LO) / NIGHT_SCRIM_SPAN))
+        const scrimVal = (SCRIM_BASE + nightT * SCRIM_PEAK).toFixed(3)
+        document.documentElement.style.setProperty('--scrim', scrimVal)
 
-	gl.uniform1f(uTi, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : (now - t0) / 1000);
-	gl.uniform1f(uScroll, smooth);
-	gl.uniform1f(uScene, si);
-	gl.uniform1f(uBlend, bl);
+        gl.uniform1f(uTi, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : (now - t0) / 1000)
+        gl.uniform1f(uScroll, smooth)
+        gl.uniform1f(uScene, si)
+        gl.uniform1f(uBlend, bl)
 
-	gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-};
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
+      }
 
-requestAnimationFrame(frame);
-
-  </script>
-</body>
+      requestAnimationFrame(frame)
+    </script>
+  </body>
 </html>
