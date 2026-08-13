@@ -67,21 +67,38 @@ body {
 	transition: --scrim 0.5s;
 }
 
-#icp {
+#site-footer {
 	position: fixed;
 	left: 50%;
 	bottom: max(0.75rem, env(safe-area-inset-bottom));
 	transform: translateX(-50%);
 	z-index: 10;
-	color: rgba(255, 255, 255, 0.55);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.75rem;
+	white-space: nowrap;
+	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+#footer-title {
+	color: rgba(255, 255, 255, 0.32);
+	font: 600 11px/1.5 system-ui, sans-serif;
+	letter-spacing: 0.15em;
+}
+
+#footer-separator {
+	color: rgba(255, 255, 255, 0.2);
+}
+
+#icp {
+	color: rgba(255, 255, 255, 0.28);
 	font: 12px/1.5 system-ui, sans-serif;
 	text-decoration: none;
-	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
-	white-space: nowrap;
 }
 
 #icp:hover {
-	color: rgba(255, 255, 255, 0.85);
+	color: rgba(255, 255, 255, 0.55);
 }
 
 #site-title {
@@ -108,7 +125,11 @@ body {
 	<div class="scene-section"></div>
 	<div class="scene-section"></div>
 </div>
-<a id="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备20003341号-1</a>
+<footer id="site-footer">
+	<div id="footer-title">FRONTEND JOURNEY</div>
+	<span id="footer-separator" aria-hidden="true">·</span>
+	<a id="icp" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备20003341号-1</a>
+</footer>
   <script>
 // ── WebGL setup ──────────────────────────────────────────────────────────────
 const canvas = document.getElementById("webgl_canvas");
